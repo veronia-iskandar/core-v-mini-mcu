@@ -8,9 +8,12 @@ name: pulp-platform.org::cluster_interconnect
 
 filesets:
   files_rtl:
+    depend:
+    - pulp-platform.org::common_cells
     files:
-    - pulp_platform_cluster_interconnect/rtl/tcdm_interconnect/xbar.sv
-    - pulp_platform_cluster_interconnect/rtl/tcdm_interconnect/addr_dec_resp_mux.sv
+    - pulp_platform_cluster_interconnect/rtl/variable_latency_interconnect/simplex_xbar.sv
+    - pulp_platform_cluster_interconnect/rtl/variable_latency_interconnect/full_duplex_xbar.sv
+    - pulp_platform_cluster_interconnect/rtl/variable_latency_interconnect/addr_decoder.sv
     file_type: systemVerilogSource
 
 targets:

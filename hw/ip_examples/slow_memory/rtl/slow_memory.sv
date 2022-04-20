@@ -89,17 +89,15 @@ module slow_memory #(
 
       READY: begin
         rvalid_n = 1'b0;
-        if (req_i) begin
-          rready_o = random1[0];
-          if (rready_o) begin
-            state_n   = WAIT_RVALID;
-            counter_n = random2[4:0] + 1;
-            mem_req_n <= req_i;
-            mem_we_n <= we_i;
-            mem_addr_n <= addr_i;
-            mem_wdata_n <= wdata_i;
-            mem_be_n <= be_i;
-          end
+        rready_o = random1[0];
+        if (random1[0] & req_i) begin
+          state_n   = WAIT_RVALID;
+          counter_n = random2[4:0] + 1;
+          mem_req_n = req_i;
+          mem_we_n = we_i;
+          mem_addr_n = addr_i;
+          mem_wdata_n = wdata_i;
+          mem_be_n = be_i;
         end
       end
 

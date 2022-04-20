@@ -7,11 +7,10 @@
 
   upstream: {
     url: "git@github.com:pulp-platform/cluster_interconnect.git",
-    rev: "7d0a4f8acae71a583a6713cab5554e60b9bb8d27",
+    rev: "ca6b81d3d789b177af920784e6eb6018d4970340",
   },
 
   exclude_from_upstream: [
-    "rtl/variable_latency_interconnect",
     "rtl/peripheral_interco",
     "rtl/core_demux",
     "rtl/low_latency_interco",
