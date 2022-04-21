@@ -23,12 +23,16 @@ module addr_decoder #(
   localparam int unsigned NumOutLog = NumOut == 1 ? 1 : $clog2(NumOut)
 ) (
   // Initiator side
+  /* verilator lint_off UNOPTFLAT */
   input  logic                             valid_i, // Request valid from this initiator
   input  logic [NumOutLog-1:0]             addr_i,  // Target selection index to be decoded
   input  logic [DataWidth-1:0]             data_i,  // Data to be transported to the targets
+  /* verilator lint_off UNOPTFLAT */
   output logic                             ready_o, // Ready to the initiator
   // Target side
+  /* verilator lint_off UNOPTFLAT */
   output logic [NumOut-1:0]                valid_o, // Request valid to this target
+  /* verilator lint_off UNOPTFLAT */
   input  logic [NumOut-1:0]                ready_i, // Targets ready to accept data
   output logic [NumOut-1:0][DataWidth-1:0] data_o
 );

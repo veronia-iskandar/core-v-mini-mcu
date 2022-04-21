@@ -34,11 +34,13 @@ module simplex_xbar #(
   input  logic [NumIn-1:0]                 valid_i,    // Valid signal
   output logic [NumIn-1:0]                 ready_o,    // Ready signal
   input  logic [NumIn-1:0][NumOutLog-1:0]  tgt_addr_i, // Target address
+  /* verilator lint_off UNOPTFLAT */
   input  logic [NumIn-1:0][DataWidth-1:0]  data_i,     // Data
   // Target side
   output logic [NumOut-1:0]                valid_o,    // Valid signal
   input  logic [NumOut-1:0]                ready_i,    // Ready signal
   output logic [NumOut-1:0][NumInLog-1:0]  ini_addr_o, // Initiator address
+  /* verilator lint_off UNOPTFLAT */
   output logic [NumOut-1:0][DataWidth-1:0] data_o      // Data
 );
 

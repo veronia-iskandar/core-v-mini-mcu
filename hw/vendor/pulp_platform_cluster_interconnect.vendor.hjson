@@ -10,6 +10,8 @@
     rev: "ca6b81d3d789b177af920784e6eb6018d4970340",
   },
 
+  patch_dir: "patches/pulp_platform_cluster_interconnect",
+
   exclude_from_upstream: [
     "rtl/peripheral_interco",
     "rtl/core_demux",
