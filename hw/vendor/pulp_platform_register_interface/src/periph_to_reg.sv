@@ -69,7 +69,7 @@ module periph_to_reg #(
   assign reg_req_o.wstrb = be_i;
   assign reg_req_o.valid = req_i;
 
-  assign gnt_o     = reg_rsp_i.ready;
+  assign gnt_o     = req_i & reg_rsp_i.ready;
 
   assign r_rdata_o = r_rdata_q;
   assign r_opc_o   = r_opc_q;
