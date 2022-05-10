@@ -12,7 +12,8 @@ module cpu_subsystem
     parameter PULP_ZFINX = 0,  // Float-in-General Purpose registers
     parameter NUM_MHPMCOUNTERS = 1,
     parameter DM_HALTADDRESS = '0,
-    parameter core_v_mini_mcu_pkg::cpu_type_e CPU_TYPE = core_v_mini_mcu_pkg::CpuType
+    parameter core_v_mini_mcu_pkg::cpu_type_e CPU_TYPE = core_v_mini_mcu_pkg::CpuType,
+    parameter GDP_NVPE          = 1
 ) (
     // Clock and Reset
     input logic clk_i,
@@ -154,7 +155,7 @@ module cpu_subsystem
     assign irq_ack_o = '0;
     assign irq_id_o  = '0;
 
-  end else begin : gen_cv32e40p
+  end else if (CPU_TYPE == cv32e40p) begin : gen_cv32e40p
     import cv32e40p_apu_core_pkg::*;
     // APU Core to FP Wrapper
     logic                              apu_req;
@@ -245,6 +246,195 @@ module cpu_subsystem
       assign apu_rdata  = '0;
       assign apu_rflags = '0;
     end
+  end else begin : gen_AVA
+    import accelerator_pkg::*;
+    import cv32e40p_apu_core_pkg::*;
+      // signals connecting core to memory
+    logic                         instr_req;
+    logic                         instr_gnt;
+    logic                         instr_rvalid;
+    logic [31:0]                  instr_addr;
+    logic [31:0]                  instr_rdata;
+
+    // Data crossbar slave 1
+    logic                         data_req_xbr_s1;
+    logic                         data_gnt_xbr_s1;
+    logic                         data_rvalid_xbr_s1;
+    logic [31:0]                  data_addr_xbr_s1;
+    logic                         data_we_xbr_s1;
+    logic [3:0]                   data_be_xbr_s1;
+    logic [31:0]                  data_rdata_xbr_s1;
+    logic [31:0]                  data_wdata_xbr_s1;
+    // Data crossbar master 1 (CPU)
+    logic                         data_req_xbr_m1;
+    logic                         data_gnt_xbr_m1;
+    logic                         data_rvalid_xbr_m1;
+    logic [31:0]                  data_addr_xbr_m1;
+    logic                         data_we_xbr_m1;
+    logic [3:0]                   data_be_xbr_m1;
+    logic [31:0]                  data_rdata_xbr_m1;
+    logic [31:0]                  data_wdata_xbr_m1;
+    // Data crossbar master 2 (NVPE)
+    logic                         data_req_xbr_m2;
+    logic                         data_gnt_xbr_m2;
+    logic                         data_rvalid_xbr_m2;
+    logic [31:0]                  data_addr_xbr_m2;
+    logic                         data_we_xbr_m2;
+    logic [3:0]                   data__xbr_m2;
+    logic [31:0]                  data_rdata_xbr_m2;
+    logic [31:0]                  data_wdata_xbr_m2;
+
+      
+    //APU
+    logic [   APU_NARGS_CPU-1:0][31:0] apu_operands;
+    logic [     APU_WOP_CPU-1:0]       apu_op;
+    logic [APU_NDSFLAGS_CPU-1:0]       apu_flags;
+    logic                         apu_req;
+    // response channel
+    logic                              apu_rvalid;
+    logic [31:0]                  apu_result;
+    logic [APU_NUSFLAGS_CPU-1:0]  apu_flags_r;
+    logic                         apu_gnt;
+
+    // signals to debug unit
+    logic                         debug_req;
+
+    // irq signals (not used)
+    logic [0:31]                  irq;
+    logic [0:4]                   irq_id_in;
+    logic                         irq_ack;
+    logic [0:4]                   irq_id_out;
+    logic                         irq_sec;
+
+    logic core_halt;
+
+    assign core_data_req_o.req    = data_req_xbr_s1;
+    assign core_data_req_o.addr   = data_addr_xbr_s1;
+    assign core_data_req_o.we     = data_we_xbr_s1;
+    assign core_data_req_o.wdata  = data_wdata_xbr_s1;
+    assign core_data_req_o.be     = data_be_xbr_s1;
+    assign data_gnt_xbr_s1        = core_data_resp_i.gnt;
+    assign data_rvalid_xbr_s1     = core_data_resp_i.rvalid;
+    assign data_rdata_xbr_s1      = core_data_resp_i.rdata;
+    assign core_data_err          = 1'b0;
+
+
+    // interrupts (only timer for now)
+    assign irq_sec     = '0;
+
+	// core log reports parameter usage and illegal instructions to the logfile
+    // instantiate the core
+    cv32e40p_wrapper #(
+        .PULP_XPULP      (PULP_XPULP),
+        .PULP_CLUSTER    (0),
+        .FPU             (FPU),
+        .PULP_ZFINX      (PULP_ZFINX),
+        .NUM_MHPMCOUNTERS(NUM_MHPMCOUNTERS),
+        .GDP_NVPE         (GDP_NVPE)
+    ) cv32e40p_wrapper_i (
+         .clk_i                  ( clk_i    ),
+         .rst_ni                 ( rst_ni                ),
+
+         .pulp_clock_en_i        ( '1                    ),
+         .scan_cg_en_i           ( '0                    ),
+
+         .boot_addr_i            ( BOOT_ADDR             ),
+         .mtvec_addr_i           (32'h0),
+         .dm_halt_addr_i         ( DM_HALTADDRESS        ),
+         .hart_id_i              ( 32'h0                 ),
+         .dm_exception_addr_i    (32'h0                  ),
+
+         .instr_addr_o            (core_instr_req_o.addr),
+         .instr_req_o             (core_instr_req_o.req),
+         .instr_rdata_i           (core_instr_resp_i.rdata),
+         .instr_gnt_i             (core_instr_resp_i.gnt),
+         .instr_rvalid_i          (core_instr_resp_i.rvalid),
+
+         .data_req_o             ( data_req_xbr_m1       ),
+         .data_gnt_i             ( data_gnt_xbr_m1       ),
+         .data_rvalid_i          ( data_rvalid_xbr_m1    ),
+         .data_we_o              ( data_we_xbr_m1        ),
+         .data_be_o              ( data_be_xbr_m1        ),
+         .data_addr_o            ( data_addr_xbr_m1      ),
+         .data_wdata_o           ( data_wdata_xbr_m1     ),
+         .data_rdata_i           ( data_rdata_xbr_m1     ),
+
+         .apu_req_o              ( apu_req               ),
+         .apu_gnt_i              ( apu_gnt               ),
+         .apu_operands_o         ( apu_operands          ),
+         .apu_op_o               ( apu_op                ),
+         .apu_flags_o            ( apu_flags             ),
+         .apu_rvalid_i           ( apu_rvalid            ),
+         .apu_result_i           ( apu_result            ),
+         .apu_flags_i            ( apu_flags_r           ), // APU_NUSFLAGS_CPU
+
+         // Interrupts verified in UVM environment
+         .irq_i                  (irq_i),
+         .irq_ack_o              (irq_ack_o),
+         .irq_id_o               (irq_id_o),
+
+         .debug_req_i            (debug_req_i),
+         .debug_havereset_o(),
+         .debug_running_o  (),
+         .debug_halted_o   (),
+         .fetch_enable_i         ( fetch_enable_i ),
+         .core_sleep_o           ( core_sleep_o ),
+         .apu_core_halt          ( core_halt )
+       );
+
+
+    cv32e40n_data_xbar xbar_mux
+       (.clk_i                  ( clk_i                     ),
+        .rst_ni                 ( rst_ni                    ),
+
+        .data_req_xbr_s1_o      ( data_req_xbr_s1           ),
+        .data_gnt_xbr_s1_i      ( data_gnt_xbr_s1           ),
+        .data_rvalid_xbr_s1_i   ( data_rvalid_xbr_s1        ),
+        .data_addr_xbr_s1_o     ( data_addr_xbr_s1          ),
+        .data_we_xbr_s1_o       ( data_we_xbr_s1            ),
+        .data_be_xbr_s1_o       ( data_be_xbr_s1            ),
+        .data_rdata_xbr_s1_i    ( data_rdata_xbr_s1         ),
+        .data_wdata_xbr_s1_o    ( data_wdata_xbr_s1         ),
+
+        .data_req_xbr_m1_i      ( data_req_xbr_m1           ),
+        .data_gnt_xbr_m1_o      ( data_gnt_xbr_m1           ),
+        .data_rvalid_xbr_m1_o   ( data_rvalid_xbr_m1        ),
+        .data_addr_xbr_m1_i     ( data_addr_xbr_m1          ),
+        .data_we_xbr_m1_i       ( data_we_xbr_m1            ),
+        .data_be_xbr_m1_i       ( data_be_xbr_m1            ),
+        .data_rdata_xbr_m1_o    ( data_rdata_xbr_m1         ),
+        .data_wdata_xbr_m1_i    ( data_wdata_xbr_m1         ),
+
+        .data_req_xbr_m2_i      ( data_req_xbr_m2           ),
+        .data_gnt_xbr_m2_o      ( data_gnt_xbr_m2           ),
+        .data_rvalid_xbr_m2_o   ( data_rvalid_xbr_m2        ),
+        .data_addr_xbr_m2_i     ( data_addr_xbr_m2          ),
+        .data_we_xbr_m2_i       ( data_we_xbr_m2            ),
+        .data_be_xbr_m2_i       ( data_be_xbr_m2            ),
+        .data_rdata_xbr_m2_o    ( data_rdata_xbr_m2         ),
+        .data_wdata_xbr_m2_i    ( data_wdata_xbr_m2         ));
+
+    accelerator_top a_top
+       (.apu_result(apu_result),
+        .apu_flags_o(apu_flags_r),
+        .apu_gnt(apu_gnt),
+        .apu_rvalid(apu_rvalid),
+        .clk(clk_i),
+        .n_reset(rst_ni),
+        .apu_req(apu_req),
+        .apu_operands_i(apu_operands),
+        .apu_op(apu_op),
+        .apu_flags_i(apu_flags),
+        .data_req_o(data_req_xbr_m2),
+        .data_gnt_i(data_gnt_xbr_m2),
+        .data_rvalid_i(data_rvalid_xbr_m2),
+        .data_we_o(data_we_xbr_m2),
+        .data_be_o(data_be_xbr_m2),
+        .data_addr_o(data_addr_xbr_m2),
+        .data_wdata_o(data_wdata_xbr_m2),
+        .data_rdata_i(data_rdata_xbr_m2),
+        .core_halt_o(core_halt));
+
 
   end
 

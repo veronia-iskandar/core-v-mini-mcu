@@ -31,7 +31,8 @@ module cv32e40p_wrapper import cv32e40p_apu_core_pkg::*;
   parameter PULP_CLUSTER        =  0,                   // PULP Cluster interface (incl. p.elw)
   parameter FPU                 =  0,                   // Floating Point Unit (interfaced via APU interface)
   parameter PULP_ZFINX          =  0,                   // Float-in-General Purpose registers
-  parameter NUM_MHPMCOUNTERS    =  1
+  parameter NUM_MHPMCOUNTERS    =  1,
+  parameter GDP_NVPE            =  1
 )
 (
   // Clock and Reset
@@ -91,7 +92,8 @@ module cv32e40p_wrapper import cv32e40p_apu_core_pkg::*;
 
   // CPU Control Signals
   input  logic        fetch_enable_i,
-  output logic        core_sleep_o
+  output logic        core_sleep_o,
+  output logic apu_core_halt
 );
 
 `ifdef CV32E40P_ASSERT_ON

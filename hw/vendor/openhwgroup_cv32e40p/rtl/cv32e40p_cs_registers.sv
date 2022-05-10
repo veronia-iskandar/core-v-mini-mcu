@@ -269,7 +269,7 @@ module cv32e40p_cs_registers import cv32e40p_pkg::*;
   logic [MAX_N_PMP_ENTRIES-1:0] pmpcfg_we;
 
   // Performance Counter Signals
-  logic [31:0] [MHPMCOUNTER_WIDTH-1:0] mhpmcounter_q;                    // performance counters
+  logic [                 31:0][MHPMCOUNTER_WIDTH-1:0] mhpmcounter_q;  // performance counters
   logic [31:0] [31:0]                  mhpmevent_q, mhpmevent_n;         // event enable
   logic [31:0]                         mcounteren_q, mcounteren_n;       // user mode counter enable
   logic [31:0]                         mcountinhibit_q, mcountinhibit_n; // performance counter enable

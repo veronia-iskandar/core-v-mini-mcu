@@ -19,6 +19,7 @@ filesets:
     - openhwgroup.org:ip:soc_ctrl
     - lowrisc:ip:uart:0.1
     - lowrisc:ibex:ibex_core:0.1
+    - AI-Vector-Accelerator:ip:ava_core
     files:
     - hw/core-v-mini-mcu/include/addr_map_rule_pkg.sv
     - hw/core-v-mini-mcu/include/obi_pkg.sv

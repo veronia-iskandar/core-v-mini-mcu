@@ -36,8 +36,8 @@ import prim_pad_wrapper_pkg::*;
 
   if (1) begin : gen_generic
     prim_generic_pad_wrapper #(
-      .PadType(PadType),
-      .ScanRole(ScanRole)
+      .ScanRole(ScanRole),
+      .PadType(PadType)
     ) u_impl_generic (
       .*
     );

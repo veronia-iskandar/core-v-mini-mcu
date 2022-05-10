@@ -17,12 +17,14 @@ package core_v_mini_mcu_pkg;
 
   import addr_map_rule_pkg::*;
 
-  typedef enum logic {
+  typedef enum {
+    ava,
     cv32e40p,
     cv32e20
   } cpu_type_e;
 
-  localparam cpu_type_e CpuType = cv32e20;
+  //localparam cpu_type_e CpuType = cv32e20;
+  localparam cpu_type_e CpuType = ava;
 
   //must be power of two
   localparam int unsigned MEM_SIZE = 2 ** 16;

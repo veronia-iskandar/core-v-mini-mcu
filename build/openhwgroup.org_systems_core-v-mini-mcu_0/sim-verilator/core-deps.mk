@@ -42,6 +42,21 @@ fusesoc-deps := \
   /home/veronia/core-v-mini-mcu/hw/vendor/pulp_platform_tech_cells_generic/src/tc_pwr.sv \
   /home/veronia/core-v-mini-mcu/hw/vendor/pulp_platform_tech_cells_generic/src/deprecated/cluster_clk_cells.sv \
   /home/veronia/core-v-mini-mcu/hw/vendor/pulp_platform_tech_cells_generic/src/deprecated/pulp_clk_cells.sv \
+  /home/veronia/core-v-mini-mcu/hw/vendor/ava_core.core \
+  /home/veronia/core-v-mini-mcu/hw/vendor/ava_accelerator/rtl/accelerator_pkg.sv \
+  /home/veronia/core-v-mini-mcu/hw/vendor/ava_accelerator/rtl/accelerator_top.sv \
+  /home/veronia/core-v-mini-mcu/hw/vendor/ava_accelerator/rtl/arith_stage.sv \
+  /home/veronia/core-v-mini-mcu/hw/vendor/ava_accelerator/rtl/bit_ext.sv \
+  /home/veronia/core-v-mini-mcu/hw/vendor/ava_accelerator/rtl/pe_32b.sv \
+  /home/veronia/core-v-mini-mcu/hw/vendor/ava_accelerator/rtl/relu_bound.sv \
+  /home/veronia/core-v-mini-mcu/hw/vendor/ava_accelerator/rtl/sat_unit.sv \
+  /home/veronia/core-v-mini-mcu/hw/vendor/ava_accelerator/rtl/scalar_replicate.sv \
+  /home/veronia/core-v-mini-mcu/hw/vendor/ava_accelerator/rtl/vector_csrs.sv \
+  /home/veronia/core-v-mini-mcu/hw/vendor/ava_accelerator/rtl/vector_decoder.sv \
+  /home/veronia/core-v-mini-mcu/hw/vendor/ava_accelerator/rtl/vector_registers.sv \
+  /home/veronia/core-v-mini-mcu/hw/vendor/ava_accelerator/rtl/vw_sign_ext.sv \
+  /home/veronia/core-v-mini-mcu/hw/vendor/ava_accelerator/rtl/vector_lsu.sv \
+  /home/veronia/core-v-mini-mcu/hw/vendor/ava_accelerator/rtl/temporary_reg.sv \
   /home/veronia/core-v-mini-mcu/hw/vendor/openhwgroup_cv32e20/ibex_core.core \
   /home/veronia/core-v-mini-mcu/hw/vendor/openhwgroup_cv32e20/lint/verilator_waiver.vlt \
   /home/veronia/core-v-mini-mcu/hw/vendor/openhwgroup_cv32e20/rtl/ibex_alu.sv \

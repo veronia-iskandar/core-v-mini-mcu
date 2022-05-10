@@ -1,6 +1,7 @@
 WARNING: Unknown item formal in section Target
 WARNING: Unknown item formal in section Target
 WARNING: Unknown item formal in section Target
+INFO: Preparing AI-Vector-Accelerator:ip:ava_core:0
 INFO: Preparing lowrisc:constants:top_pkg:0
 INFO: Preparing lowrisc:dv_dpi:uartdpi:0.1
 INFO: Preparing lowrisc:ibex:ibex_pkg:0.1
@@ -112,19 +113,535 @@ INFO: Building simulation model
 INFO: verilator -f openhwgroup.org_systems_core-v-mini-mcu_0.vc --cc --trace --trace-fst --trace-structs --trace-params --trace-max-array 1024 --x-assign unique --x-initial unique --exe tb_top.cpp -CFLAGS "-std=c++11 -Wall -g -fpermissive" -LDFLAGS "-pthread -lutil -lelf" -Wall
 Makefile:16: recipe for target 'Vtestharness.mk' failed
 
-ERROR: %Error-PKGNODECL: ../../../hw/vendor/openhwgroup_cv32e40p/rtl/cv32e40p_decoder.sv:28:117: Package/class 'accelerator_pkg' not found, and needs to be predeclared (IEEE 1800-2017 26.3)
-   28 | module cv32e40p_decoder import cv32e40p_pkg::*; import cv32e40p_apu_core_pkg::*; import cv32e40p_fpu_pkg::*; import accelerator_pkg::*;
-      |                                                                                                                     ^~~~~~~~~~~~~~~
-                  ... For error description see https://verilator.org/warn/PKGNODECL?v=4.202
-%Error: ../../../hw/vendor/openhwgroup_cv32e40p/rtl/cv32e40p_decoder.sv:28:117: Importing from missing package 'accelerator_pkg'
-   28 | module cv32e40p_decoder import cv32e40p_pkg::*; import cv32e40p_apu_core_pkg::*; import cv32e40p_fpu_pkg::*; import accelerator_pkg::*;
-      |                                                                                                                     ^~~~~~~~~~~~~~~
+ERROR: %Warning-EOFNEWLINE: ../../../hw/vendor/ava_accelerator/rtl/vector_registers.sv:527:10: Missing newline at end of file (POSIX 3.206).                                                                                      : ... Suggest add newline.
+  527 | endmodule
+      |          ^
+                     ... For warning description see https://verilator.org/warn/EOFNEWLINE?v=4.202
+                     ... Use "/* verilator lint_off EOFNEWLINE */" and lint_on around source to disable this message.
+%Warning-EOFNEWLINE: ../../../hw/vendor/ava_accelerator/rtl/vw_sign_ext.sv:31:18: Missing newline at end of file (POSIX 3.206).                                                                                : ... Suggest add newline.
+   31 | always_comb begin 
+      |                  ^
+%Warning-EOFNEWLINE: ../../../hw/vendor/ava_accelerator/rtl/temporary_reg.sv:55:22: Missing newline at end of file (POSIX 3.206).                                                                                  : ... Suggest add newline.
+   55 |     always_comb begin 
+      |                      ^
 %Warning-EOFNEWLINE: ../../../hw/vendor/openhwgroup_cv32e40p/rtl/cv32e40n_data_xbar.sv:94:10: Missing newline at end of file (POSIX 3.206).                                                                                            : ... Suggest add newline.
    94 | endmodule
       |          ^
-                     ... Use "/* verilator lint_off EOFNEWLINE */" and lint_on around source to disable this message.
-%Error: Exiting due to 2 error(s), 1 warning(s)
-        ... See the manual at https://verilator.org/verilator_doc.html for more assistance.
+%Warning-PINMISSING: ../../../hw/core-v-mini-mcu/cpu_subsystem.sv:180:7: Cell has missing pin: 'apu_core_halt'
+  180 |     ) cv32e40p_wrapper_i (
+      |       ^~~~~~~~~~~~~~~~~~
+%Warning-IMPORTSTAR: ../../../hw/vendor/ava_accelerator/rtl/accelerator_top.sv:17:23: Import::* in $unit scope may pollute global namespace
+   17 | import accelerator_pkg::*;
+      |                       ^~
+%Warning-IMPORTSTAR: ../../../hw/vendor/ava_accelerator/rtl/arith_stage.sv:18:23: Import::* in $unit scope may pollute global namespace
+   18 | import accelerator_pkg::*;
+      |                       ^~
+%Warning-IMPORTSTAR: ../../../hw/vendor/ava_accelerator/rtl/pe_32b.sv:20:23: Import::* in $unit scope may pollute global namespace
+   20 | import accelerator_pkg::*;
+      |                       ^~
+%Warning-IMPORTSTAR: ../../../hw/vendor/ava_accelerator/rtl/vector_decoder.sv:17:23: Import::* in $unit scope may pollute global namespace
+   17 | import accelerator_pkg::*;
+      |                       ^~
+%Warning-IMPORTSTAR: ../../../hw/vendor/ava_accelerator/rtl/vector_lsu.sv:16:23: Import::* in $unit scope may pollute global namespace
+   16 | import accelerator_pkg::*;
+      |                       ^~
+%Warning-VARHIDDEN: ../../../hw/vendor/openhwgroup_cv32e40p/rtl/cv32e40p_mult.sv:96:21: Declaration of enum value hides declaration in upper scope: IDLE
+   96 |   enum logic [2:0] {IDLE, STEP0, STEP1, STEP2, FINISH} mulh_CS, mulh_NS;
+      |                     ^~~~
+                    ../../../hw/vendor/openhwgroup_cv32e40p/rtl/include/cv32e40p_pkg.sv:194:21: ... Location of original declaration
+   96 |   enum logic [2:0] {IDLE, STEP0, STEP1, STEP2, FINISH} mulh_CS, mulh_NS;
+      |                     ^~~~
+%Warning-IMPLICIT: ../../../hw/vendor/openhwgroup_cv32e40p/rtl/cv32e40p_prefetch_buffer.sv:120:33: Signal definition not found, creating implicitly: 'fifo_empty'
+                                                                                                 : ... Suggested alternative: 'fifo_cnt'
+  120 |     .fifo_empty_i             ( fifo_empty           )
+      |                                 ^~~~~~~~~~
+%Warning-IMPLICIT: ../../../hw/vendor/openhwgroup_cv32e40p/rtl/cv32e40p_prefetch_buffer.sv:140:28: Signal definition not found, creating implicitly: 'fifo_full'
+                                                                                                 : ... Suggested alternative: 'fifo_flush'
+  140 |       .full_o            ( fifo_full            ),
+      |                            ^~~~~~~~~
+%Warning-IMPLICIT: ../../../hw/core-v-mini-mcu/cpu_subsystem.sv:319:12: Signal definition not found, creating implicitly: 'core_data_err'
+                                                                      : ... Suggested alternative: 'core_data_req_o'
+  319 |     assign core_data_err          = 1'b0;
+      |            ^~~~~~~~~~~~~
+%Warning-IMPLICIT: ../../../hw/core-v-mini-mcu/cpu_subsystem.sv:381:36: Signal definition not found, creating implicitly: 'core_sleep_o'
+  381 |          .core_sleep_o           ( core_sleep_o ),
+      |                                    ^~~~~~~~~~~~
+%Warning-IMPLICIT: ../../../hw/core-v-mini-mcu/cpu_subsystem.sv:413:35: Signal definition not found, creating implicitly: 'data_be_xbr_m2'
+  413 |         .data_be_xbr_m2_i       ( data_be_xbr_m2            ),
+      |                                   ^~~~~~~~~~~~~~
+%Warning-WIDTH: ../../../hw/vendor/openhwgroup_cv32e40p/rtl/cv32e40p_id_stage.sv:716:5: Operator CASE expects 3 bits on the Case expression, but Case expression's VARREF 'alu_op_c_mux_sel' generates 2 bits.
+                                                                                      : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.cv32e40p_wrapper_i.core_i.id_stage_i
+  716 |     case (alu_op_c_mux_sel)
+      |     ^~~~
+%Warning-WIDTH: ../../../hw/vendor/openhwgroup_cv32e40p/rtl/cv32e40p_id_stage.sv:716:5: Operator CASE expects 3 bits on the Case Item, but Case Item's VARREF 'OP_C_REGC_OR_FWD' generates 2 bits.
+                                                                                      : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.cv32e40p_wrapper_i.core_i.id_stage_i
+  716 |     case (alu_op_c_mux_sel)
+      |     ^~~~
+%Warning-WIDTH: ../../../hw/vendor/openhwgroup_cv32e40p/rtl/cv32e40p_id_stage.sv:716:5: Operator CASE expects 3 bits on the Case Item, but Case Item's VARREF 'OP_C_REGB_OR_FWD' generates 2 bits.
+                                                                                      : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.cv32e40p_wrapper_i.core_i.id_stage_i
+  716 |     case (alu_op_c_mux_sel)
+      |     ^~~~
+%Warning-WIDTH: ../../../hw/vendor/openhwgroup_cv32e40p/rtl/cv32e40p_id_stage.sv:716:5: Operator CASE expects 3 bits on the Case Item, but Case Item's VARREF 'OP_C_JT' generates 2 bits.
+                                                                                      : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.cv32e40p_wrapper_i.core_i.id_stage_i
+  716 |     case (alu_op_c_mux_sel)
+      |     ^~~~
+%Warning-WIDTH: ../../../hw/vendor/openhwgroup_cv32e40p/rtl/cv32e40p_ex_stage.sv:195:30: Operator ASSIGN expects 6 bits on the Assign RHS, but Assign RHS's CONST '5'h0' generates 5 bits.
+                                                                                       : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.cv32e40p_wrapper_i.core_i.ex_stage_i
+  195 |       regfile_alu_waddr_fw_o = 5'd0;
+      |                              ^
+%Warning-WIDTH: ../../../hw/vendor/ava_accelerator/rtl/temporary_reg.sv:33:29: Operator ASSIGNDLY expects 4 bits on the Assign RHS, but Assign RHS's CONST '1'h0' generates 1 bits.
+                                                                             : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.vlsu0.tr
+   33 |             byte_enable_reg <= 1'b0;
+      |                             ^~
+%Warning-WIDTH: ../../../hw/vendor/ava_accelerator/rtl/scalar_replicate.sv:81:28: Operator ASSIGN expects 128 bits on the Assign RHS, but Assign RHS's REPLICATE generates 33 bits.
+                                                                                : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.arith_stage0.scalar_rep0
+   81 |             replicated_out = {'0, scalar_in};
+      |                            ^
+%Warning-WIDTH: ../../../hw/vendor/ava_accelerator/rtl/pe_32b.sv:226:28: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's REPLICATE generates 17 bits.
+                                                                       : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.arith_stage0.pe3
+  226 |                 sat_result = {'0, sat16_result};
+      |                            ^
+%Warning-WIDTH: ../../../hw/vendor/ava_accelerator/rtl/pe_32b.sv:237:28: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's REPLICATE generates 9 bits.
+                                                                       : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.arith_stage0.pe3
+  237 |                 sat_result = {'0, sat8_result};
+      |                            ^
+%Warning-WIDTH: ../../../hw/vendor/ava_accelerator/rtl/pe_32b.sv:239:28: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's REPLICATE generates 17 bits.
+                                                                       : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.arith_stage0.pe3
+  239 |                 sat_result = {'0, sat16_result};
+      |                            ^
+%Warning-WIDTH: ../../../hw/vendor/ava_accelerator/rtl/vector_lsu.sv:77:40: Operator ADD expects 7 bits on the RHS, but RHS's REPLICATE generates 4 bits.
+                                                                          : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.vlsu0
+   77 |         .byte_select_i      (vd_offset + {vr_addr_i[1:0], 2'b00}),
+      |                                        ^
+%Warning-WIDTH: ../../../hw/vendor/ava_accelerator/rtl/vector_lsu.sv:122:87: Operator SHIFTL expects 32 bits on the LHS, but LHS's VARREF 'store_cycles_cnt' generates 3 bits.
+                                                                           : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.vlsu0
+  122 |     assign data_addr_o = vlsu_store_i ? ({cycle_addr[31:2], 2'd0} + (store_cycles_cnt << 2)) : {cycle_addr[31:2], 2'd0};
+      |                                                                                       ^~
+%Warning-WIDTH: ../../../hw/vendor/ava_accelerator/rtl/vector_lsu.sv:124:30: Operator SHIFTL expects 7 bits on the LHS, but LHS's VARREF 'vl_i' generates 5 bits.
+                                                                           : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.vlsu0
+  124 |     assign vd_offset = (vl_i << vsew_i) - byte_track;
+      |                              ^~
+%Warning-WIDTH: ../../../hw/vendor/ava_accelerator/rtl/vector_lsu.sv:145:42: Operator SUB expects 7 bits on the RHS, but RHS's VARREF 'store_cycle_bytes' generates 3 bits.
+                                                                           : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.vlsu0
+  145 |             byte_track_next = byte_track - store_cycle_bytes;
+      |                                          ^
+%Warning-WIDTH: ../../../hw/vendor/ava_accelerator/rtl/vector_lsu.sv:168:25: Operator ASSIGNW expects 3 bits on the Assign RHS, but Assign RHS's ADD generates 32 or 5 bits.
+                                                                           : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.vlsu0
+  168 |     assign store_cycles = (vl_i >> 2-vsew_i)+1;
+      |                         ^
+%Warning-WIDTH: ../../../hw/vendor/ava_accelerator/rtl/vector_lsu.sv:169:35: Operator ADD expects 5 bits on the RHS, but RHS's VARREF 'store_cycles_cnt' generates 3 bits.
+                                                                           : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.vlsu0
+  169 |     assign vs3_addr_o = vr_addr_i + store_cycles_cnt;
+      |                                   ^
+%Warning-WIDTH: ../../../hw/vendor/ava_accelerator/rtl/vector_lsu.sv:172:30: Operator ASSIGNDLY expects 3 bits on the Assign RHS, but Assign RHS's CONST '2'h0' generates 2 bits.
+                                                                           : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.vlsu0
+  172 |             store_cycles_cnt <= 2'd0;
+      |                              ^~
+%Warning-WIDTH: ../../../hw/vendor/ava_accelerator/rtl/vector_lsu.sv:174:30: Operator ASSIGNDLY expects 3 bits on the Assign RHS, but Assign RHS's CONST '2'h0' generates 2 bits.
+                                                                           : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.vlsu0
+  174 |             store_cycles_cnt <= 2'd0;
+      |                              ^~
+%Warning-WIDTH: ../../../hw/vendor/ava_accelerator/rtl/vector_lsu.sv:211:44: Operator EQ expects 32 bits on the LHS, but LHS's VARREF 'ib_select' generates 2 bits.
+                                                                           : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.vlsu0
+  211 |                     be_gen[0] = (ib_select == 32'd0) ? 1 : 0;
+      |                                            ^~
+%Warning-WIDTH: ../../../hw/vendor/ava_accelerator/rtl/vector_registers.sv:258:17: Operator CASE expects 4 bits on the Case expression, but Case expression's VARREF 'elements_to_write' generates 2 bits.
+                                                                                 : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.vreg0
+  258 |                 case (elements_to_write)
+      |                 ^~~~
+%Warning-WIDTH: ../../../hw/vendor/ava_accelerator/rtl/vector_registers.sv:258:17: Operator CASE expects 4 bits on the Case Item, but Case Item's CONST '2'h0' generates 2 bits.
+                                                                                 : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.vreg0
+  258 |                 case (elements_to_write)
+      |                 ^~~~
+%Warning-WIDTH: ../../../hw/vendor/ava_accelerator/rtl/vector_registers.sv:258:17: Operator CASE expects 4 bits on the Case Item, but Case Item's CONST '2'h1' generates 2 bits.
+                                                                                 : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.vreg0
+  258 |                 case (elements_to_write)
+      |                 ^~~~
+%Warning-WIDTH: ../../../hw/vendor/ava_accelerator/rtl/vector_registers.sv:258:17: Operator CASE expects 4 bits on the Case Item, but Case Item's CONST '2'h2' generates 2 bits.
+                                                                                 : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.vreg0
+  258 |                 case (elements_to_write)
+      |                 ^~~~
+%Warning-WIDTH: ../../../hw/vendor/ava_accelerator/rtl/vector_decoder.sv:185:21: Operator ASSIGN expects 4 bits on the Assign RHS, but Assign RHS's SUB generates 5 bits.
+                                                                               : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.vdec0
+  185 |     vl_zero_indexed = vl - 1'b1;
+      |                     ^
+%Warning-WIDTH: ../../../hw/vendor/ava_accelerator/rtl/vector_decoder.sv:192:32: Operator ADD expects 5 bits on the RHS, but RHS's VARREF 'cycle_count' generates 2 bits.
+                                                                               : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.vdec0
+  192 |             vs1_addr = source1 + cycle_count;
+      |                                ^
+%Warning-WIDTH: ../../../hw/vendor/ava_accelerator/rtl/vector_decoder.sv:193:32: Operator ADD expects 5 bits on the RHS, but RHS's VARREF 'cycle_count' generates 2 bits.
+                                                                               : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.vdec0
+  193 |             vs2_addr = source2 + cycle_count;
+      |                                ^
+%Warning-WIDTH: ../../../hw/vendor/ava_accelerator/rtl/vector_decoder.sv:199:43: Operator ADD expects 5 bits on the RHS, but RHS's REPLICATE generates 3 bits.
+                                                                               : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.vdec0
+  199 |                     vd_addr = destination + {cycle_count, 1'b0};
+      |                                           ^
+%Warning-WIDTH: ../../../hw/vendor/ava_accelerator/rtl/vector_decoder.sv:201:43: Operator ADD expects 5 bits on the RHS, but RHS's VARREF 'cycle_count' generates 2 bits.
+                                                                               : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.vdec0
+  201 |                     vd_addr = destination + cycle_count;
+      |                                           ^
+%Warning-WIDTH: ../../../hw/vendor/ava_accelerator/rtl/vector_decoder.sv:206:32: Operator ADD expects 5 bits on the RHS, but RHS's REPLICATE generates 3 bits.
+                                                                               : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.vdec0
+  206 |             vs1_addr = source1 + {cycle_count, 1'b0};
+      |                                ^
+%Warning-WIDTH: ../../../hw/vendor/ava_accelerator/rtl/vector_decoder.sv:207:32: Operator ADD expects 5 bits on the RHS, but RHS's REPLICATE generates 3 bits.
+                                                                               : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.vdec0
+  207 |             vs2_addr = source2 + {cycle_count, 1'b0};
+      |                                ^
+%Warning-WIDTH: ../../../hw/vendor/ava_accelerator/rtl/vector_decoder.sv:211:39: Operator ADD expects 5 bits on the RHS, but RHS's REPLICATE generates 3 bits.
+                                                                               : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.vdec0
+  211 |                 vd_addr = destination + {cycle_count, 1'b0};
+      |                                       ^
+%Warning-WIDTH: ../../../hw/vendor/ava_accelerator/rtl/vector_decoder.sv:215:32: Operator ADD expects 5 bits on the RHS, but RHS's VARREF 'cycle_count' generates 2 bits.
+                                                                               : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.vdec0
+  215 |             vs1_addr = source1 + cycle_count;
+      |                                ^
+%Warning-WIDTH: ../../../hw/vendor/ava_accelerator/rtl/vector_decoder.sv:216:32: Operator ADD expects 5 bits on the RHS, but RHS's VARREF 'cycle_count' generates 2 bits.
+                                                                               : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.vdec0
+  216 |             vs2_addr = source2 + cycle_count;
+      |                                ^
+%Warning-WIDTH: ../../../hw/vendor/ava_accelerator/rtl/vector_decoder.sv:220:39: Operator ADD expects 5 bits on the RHS, but RHS's VARREF 'cycle_count' generates 2 bits.
+                                                                               : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.vdec0
+  220 |                 vd_addr = destination + cycle_count;
+      |                                       ^
+%Warning-WIDTH: ../../../hw/vendor/ava_accelerator/rtl/vector_decoder.sv:227:31: Operator ASSIGN expects 11 bits on the Assign RHS, but Assign RHS's REPLICATE generates 6 bits.
+                                                                               : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.vdec0
+  227 |             immediate_operand = {'0, reg_apu_operands[0][19:15]};
+      |                               ^
+%Warning-WIDTH: ../../../hw/vendor/ava_accelerator/rtl/vector_csrs.sv:63:21: Operator ASSIGNDLY expects 32 bits on the Assign RHS, but Assign RHS's REPLICATE generates 6 bits.
+                                                                           : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.vcsrs0
+   63 |             csrs[3] <= {'0, vtype_in};
+      |                     ^~
+%Warning-WIDTH: ../../../hw/vendor/ava_accelerator/rtl/vector_csrs.sv:68:25: Operator ASSIGNDLY expects 32 bits on the Assign RHS, but Assign RHS's REPLICATE generates 6 bits.
+                                                                           : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.vcsrs0
+   68 |                 csrs[2] <= {'0 , vl_next};
+      |                         ^~
+%Warning-WIDTH: ../../../hw/vendor/ava_accelerator/rtl/vector_csrs.sv:100:25: Operator SHIFTL expects 5 bits on the LHS, but LHS's VARREF 'per_reg' generates 3 bits.
+                                                                            : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.vcsrs0
+  100 | assign max_vl = per_reg << vtype_in[1:0];
+      |                         ^~
+%Warning-WIDTH: ../../../hw/vendor/ava_accelerator/rtl/arith_stage.sv:156:28: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's REPLICATE generates 6 bits.
+                                                                            : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.arith_stage0
+  156 |                 pe0_b_data = {'0, imm_operand[4:0]};
+      |                            ^
+%Warning-WIDTH: ../../../hw/vendor/ava_accelerator/rtl/arith_stage.sv:157:28: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's REPLICATE generates 6 bits.
+                                                                            : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.arith_stage0
+  157 |                 pe1_b_data = {'0, imm_operand[4:0]};
+      |                            ^
+%Warning-WIDTH: ../../../hw/vendor/ava_accelerator/rtl/arith_stage.sv:158:28: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's REPLICATE generates 6 bits.
+                                                                            : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.arith_stage0
+  158 |                 pe2_b_data = {'0, imm_operand[4:0]};
+      |                            ^
+%Warning-WIDTH: ../../../hw/vendor/ava_accelerator/rtl/arith_stage.sv:159:28: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's REPLICATE generates 6 bits.
+                                                                            : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.arith_stage0
+  159 |                 pe3_b_data = {'0, imm_operand[4:0]};
+      |                            ^
+%Warning-WIDTH: ../../../hw/vendor/ava_accelerator/rtl/arith_stage.sv:200:30: Operator ASSIGN expects 128 bits on the Assign RHS, but Assign RHS's REPLICATE generates 33 bits.
+                                                                            : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.arith_stage0
+  200 |                 arith_output = {'0, pe3_out};
+      |                              ^
+%Warning-WIDTH: ../../../hw/vendor/ava_accelerator/rtl/arith_stage.sv:202:30: Operator ASSIGN expects 128 bits on the Assign RHS, but Assign RHS's REPLICATE generates 33 bits.
+                                                                            : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.arith_stage0
+  202 |                 arith_output = {'0, pe0_out};
+      |                              ^
+%Warning-WIDTH: ../../../hw/vendor/ava_accelerator/rtl/arith_stage.sv:204:30: Operator ASSIGN expects 128 bits on the Assign RHS, but Assign RHS's REPLICATE generates 33 bits.
+                                                                            : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.arith_stage0
+  204 |                 arith_output = {'0, pe1_out};
+      |                              ^
+%Warning-WIDTH: ../../../hw/vendor/ava_accelerator/rtl/arith_stage.sv:206:30: Operator ASSIGN expects 128 bits on the Assign RHS, but Assign RHS's REPLICATE generates 33 bits.
+                                                                            : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.arith_stage0
+  206 |                 arith_output = {'0, pe2_out};
+      |                              ^
+%Warning-WIDTH: ../../../hw/vendor/ava_accelerator/rtl/arith_stage.sv:208:30: Operator ASSIGN expects 128 bits on the Assign RHS, but Assign RHS's REPLICATE generates 33 bits.
+                                                                            : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.arith_stage0
+  208 |                 arith_output = {'0, pe3_out};
+      |                              ^
+%Warning-WIDTH: ../../../hw/vendor/ava_accelerator/rtl/accelerator_top.sv:289:28: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's REPLICATE generates 6 bits.
+                                                                                : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top
+  289 |             reg_apu_result = {'0, vl_next_comb};
+      |                            ^
+%Warning-LITENDIAN: ../../../hw/core-v-mini-mcu/cpu_subsystem.sv:303:11: Little bit endian vector: left < right of bit range: [0:31]
+                                                                       : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i
+  303 |     logic [0:31]                  irq;
+      |           ^
+%Warning-LITENDIAN: ../../../hw/core-v-mini-mcu/cpu_subsystem.sv:304:11: Little bit endian vector: left < right of bit range: [0:4]
+                                                                       : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i
+  304 |     logic [0:4]                   irq_id_in;
+      |           ^
+%Warning-LITENDIAN: ../../../hw/core-v-mini-mcu/cpu_subsystem.sv:306:11: Little bit endian vector: left < right of bit range: [0:4]
+                                                                       : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i
+  306 |     logic [0:4]                   irq_id_out;
+      |           ^
+%Warning-WIDTH: ../../../hw/core-v-mini-mcu/cpu_subsystem.sv:413:10: Input port connection 'data_be_xbr_m2_i' expects 4 bits on the pin connection, but pin connection's VARREF 'data_be_xbr_m2' generates 1 bits.
+                                                                   : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i
+  413 |         .data_be_xbr_m2_i       ( data_be_xbr_m2            ),
+      |          ^~~~~~~~~~~~~~~~
+%Warning-WIDTH: ../../../hw/core-v-mini-mcu/cpu_subsystem.sv:432:10: Output port connection 'data_be_o' expects 4 bits on the pin connection, but pin connection's VARREF 'data_be_xbr_m2' generates 1 bits.
+                                                                   : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i
+  432 |         .data_be_o(data_be_xbr_m2),
+      |          ^~~~~~~~~
+%Warning-UNUSED: ../../../hw/core-v-mini-mcu/cpu_subsystem.sv:253:35: Signal is not driven, nor used: 'instr_req'
+                                                                    : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i
+  253 |     logic                         instr_req;
+      |                                   ^~~~~~~~~
+%Warning-UNUSED: ../../../hw/core-v-mini-mcu/cpu_subsystem.sv:254:35: Signal is not driven, nor used: 'instr_gnt'
+                                                                    : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i
+  254 |     logic                         instr_gnt;
+      |                                   ^~~~~~~~~
+%Warning-UNUSED: ../../../hw/core-v-mini-mcu/cpu_subsystem.sv:255:35: Signal is not driven, nor used: 'instr_rvalid'
+                                                                    : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i
+  255 |     logic                         instr_rvalid;
+      |                                   ^~~~~~~~~~~~
+%Warning-UNUSED: ../../../hw/core-v-mini-mcu/cpu_subsystem.sv:256:35: Signal is not driven, nor used: 'instr_addr'
+                                                                    : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i
+  256 |     logic [31:0]                  instr_addr;
+      |                                   ^~~~~~~~~~
+%Warning-UNUSED: ../../../hw/core-v-mini-mcu/cpu_subsystem.sv:257:35: Signal is not driven, nor used: 'instr_rdata'
+                                                                    : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i
+  257 |     logic [31:0]                  instr_rdata;
+      |                                   ^~~~~~~~~~~
+%Warning-UNUSED: ../../../hw/core-v-mini-mcu/cpu_subsystem.sv:283:35: Signal is not driven, nor used: 'data__xbr_m2'
+                                                                    : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i
+  283 |     logic [3:0]                   data__xbr_m2;
+      |                                   ^~~~~~~~~~~~
+%Warning-UNUSED: ../../../hw/core-v-mini-mcu/cpu_subsystem.sv:300:35: Signal is not driven, nor used: 'debug_req'
+                                                                    : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i
+  300 |     logic                         debug_req;
+      |                                   ^~~~~~~~~
+%Warning-UNUSED: ../../../hw/core-v-mini-mcu/cpu_subsystem.sv:303:35: Signal is not driven, nor used: 'irq'
+                                                                    : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i
+  303 |     logic [0:31]                  irq;
+      |                                   ^~~
+%Warning-UNUSED: ../../../hw/core-v-mini-mcu/cpu_subsystem.sv:304:35: Signal is not driven, nor used: 'irq_id_in'
+                                                                    : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i
+  304 |     logic [0:4]                   irq_id_in;
+      |                                   ^~~~~~~~~
+%Warning-UNUSED: ../../../hw/core-v-mini-mcu/cpu_subsystem.sv:305:35: Signal is not driven, nor used: 'irq_ack'
+                                                                    : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i
+  305 |     logic                         irq_ack;
+      |                                   ^~~~~~~
+%Warning-UNUSED: ../../../hw/core-v-mini-mcu/cpu_subsystem.sv:306:35: Signal is not driven, nor used: 'irq_id_out'
+                                                                    : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i
+  306 |     logic [0:4]                   irq_id_out;
+      |                                   ^~~~~~~~~~
+%Warning-UNUSED: ../../../hw/core-v-mini-mcu/cpu_subsystem.sv:307:35: Signal is not used: 'irq_sec'
+                                                                    : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i
+  307 |     logic                         irq_sec;
+      |                                   ^~~~~~~
+%Warning-UNUSED: ../../../hw/core-v-mini-mcu/cpu_subsystem.sv:309:11: Signal is not used: 'core_halt'
+                                                                    : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i
+  309 |     logic core_halt;
+      |           ^~~~~~~~~
+%Warning-UNUSED: ../../../hw/core-v-mini-mcu/cpu_subsystem.sv:319:12: Signal is not used: 'core_data_err'
+                                                                    : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i
+  319 |     assign core_data_err          = 1'b0;
+      |            ^~~~~~~~~~~~~
+%Warning-UNUSED: ../../../hw/core-v-mini-mcu/cpu_subsystem.sv:381:36: Signal is not used: 'core_sleep_o'
+                                                                    : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i
+  381 |          .core_sleep_o           ( core_sleep_o ),
+      |                                    ^~~~~~~~~~~~
+%Warning-UNUSED: ../../../hw/vendor/ava_accelerator/rtl/accelerator_top.sv:53:13: Bits of signal are not used: 'immediate_operand'[10:5]
+                                                                                : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top
+   53 | wire [10:0] immediate_operand;
+      |             ^~~~~~~~~~~~~~~~~
+%Warning-UNDRIVEN: ../../../hw/vendor/openhwgroup_cv32e40p/bhv/cv32e40p_wrapper.sv:96:16: Signal is not driven: 'apu_core_halt'
+                                                                                        : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.cv32e40p_wrapper_i
+   96 |   output logic apu_core_halt
+      |                ^~~~~~~~~~~~~
+%Warning-UNUSED: ../../../hw/vendor/ava_accelerator/rtl/arith_stage.sv:30:22: Signal is not used: 'elements_to_write'
+                                                                            : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.arith_stage0
+   30 |     input wire [1:0] elements_to_write,
+      |                      ^~~~~~~~~~~~~~~~~
+%Warning-UNUSED: ../../../hw/vendor/ava_accelerator/rtl/arith_stage.sv:40:22: Bits of signal are not used: 'vl'[4:2]
+                                                                            : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.arith_stage0
+   40 |     input wire [4:0] vl,
+      |                      ^~
+%Warning-UNUSED: ../../../hw/vendor/ava_accelerator/rtl/vector_csrs.sv:30:16: Signal is not used: 'saturate_flag'
+                                                                            : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.vcsrs0
+   30 |     input wire saturate_flag,
+      |                ^~~~~~~~~~~~~
+%Warning-UNUSED: ../../../hw/vendor/ava_accelerator/rtl/vector_decoder.sv:57:17: Signal is not used: 'vlsu_ready_i'
+                                                                               : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.vdec0
+   57 |     input logic vlsu_ready_i,
+      |                 ^~~~~~~~~~~~
+%Warning-UNUSED: ../../../hw/vendor/ava_accelerator/rtl/vector_decoder.sv:70:13: Signal is not used: 'reg_apu_op'
+                                                                               : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.vdec0
+   70 | logic [5:0] reg_apu_op;
+      |             ^~~~~~~~~~
+%Warning-UNUSED: ../../../hw/vendor/ava_accelerator/rtl/vector_decoder.sv:71:14: Signal is not used: 'reg_apu_flags_i'
+                                                                               : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.vdec0
+   71 | logic [14:0] reg_apu_flags_i;
+      |              ^~~~~~~~~~~~~~~
+%Warning-UNUSED: ../../../hw/vendor/ava_accelerator/rtl/vector_decoder.sv:177:13: Bits of signal are not used: 'vl_zero_indexed'[1:0]
+                                                                                : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.vdec0
+  177 | logic [3:0] vl_zero_indexed;
+      |             ^~~~~~~~~~~~~~~
+%Warning-UNUSED: ../../../hw/vendor/ava_accelerator/rtl/vector_lsu.sv:25:25: Signal is not used: 'vlmul_i'
+                                                                           : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.vlsu0
+   25 |     input  wire [1:0]   vlmul_i,
+      |                         ^~~~~~~
+%Warning-UNUSED: ../../../hw/vendor/ava_accelerator/rtl/vector_lsu.sv:28:25: Signal is not used: 'vlsu_en_i'
+                                                                           : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.vlsu0
+   28 |     input  wire         vlsu_en_i,
+      |                         ^~~~~~~~~
+%Warning-UNUSED: ../../../hw/vendor/ava_accelerator/rtl/vector_lsu.sv:37:25: Signal is not used: 'data_gnt_i'
+                                                                           : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.vlsu0
+   37 |     input  logic        data_gnt_i,
+      |                         ^~~~~~~~~~
+%Warning-UNUSED: ../../../hw/vendor/ava_accelerator/rtl/vector_lsu.sv:45:25: Signal is not used: 'cycle_count_i'
+                                                                           : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.vlsu0
+   45 |     input  logic [1:0]  cycle_count_i,
+      |                         ^~~~~~~~~~~~~
+%Warning-UNUSED: ../../../hw/vendor/ava_accelerator/rtl/vector_lsu.sv:59:18: Signal is not driven, nor used: 'vs_rdata_sel'
+                                                                           : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.vlsu0
+   59 |     logic [31:0] vs_rdata_sel;
+      |                  ^~~~~~~~~~~~
+%Warning-UNUSED: ../../../hw/vendor/ava_accelerator/rtl/vector_lsu.sv:60:17: Signal is not driven, nor used: 'vsew_size'
+                                                                           : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.vlsu0
+   60 |     logic [5:0] vsew_size;
+      |                 ^~~~~~~~~
+%Warning-UNUSED: ../../../hw/vendor/ava_accelerator/rtl/vector_lsu.sv:64:17: Signal is not driven, nor used: 'au_bc'
+                                                                           : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.vlsu0
+   64 |     logic [6:0] au_bc;
+      |                 ^~~~~
+%Warning-UNUSED: ../../../hw/vendor/ava_accelerator/rtl/vector_lsu.sv:65:18: Signal is not driven, nor used: 'au_addr'
+                                                                           : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.vlsu0
+   65 |     logic [31:0] au_addr;
+      |                  ^~~~~~~
+%Warning-UNUSED: ../../../hw/vendor/ava_accelerator/rtl/vector_lsu.sv:66:11: Signal is not driven, nor used: 'au_valid'
+                                                                           : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.vlsu0
+   66 |     logic au_valid, au_ready;
+      |           ^~~~~~~~
+%Warning-UNUSED: ../../../hw/vendor/ava_accelerator/rtl/vector_lsu.sv:66:21: Signal is not used: 'au_ready'
+                                                                           : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.vlsu0
+   66 |     logic au_valid, au_ready;
+      |                     ^~~~~~~~
+%Warning-UNUSED: ../../../hw/vendor/ava_accelerator/rtl/vector_lsu.sv:115:11: Signal is not used: 'cycle_load'
+                                                                            : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.vlsu0
+  115 |     logic cycle_load, cycle_addr_inc, store_cycles_inc;
+      |           ^~~~~~~~~~
+%Warning-UNDRIVEN: ../../../hw/vendor/ava_accelerator/rtl/vector_lsu.sv:117:17: Signal is not driven: 'store_cycle_bytes'
+                                                                              : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.vlsu0
+  117 |     logic [2:0] store_cycle_bytes;
+      |                 ^~~~~~~~~~~~~~~~~
+%Warning-UNUSED: ../../../hw/vendor/ava_accelerator/rtl/pe_32b.sv:42:21: Bits of signal are not used: 'mult_wide'[65:33]
+                                                                       : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.arith_stage0.pe3
+   42 | logic signed [65:0] mult_wide;
+      |                     ^~~~~~~~~
+%Warning-UNUSED: ../../../hw/vendor/ava_accelerator/rtl/pe_32b.sv:60:13: Signal is not used: 'sign_ext_c'
+                                                                       : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.a_top.arith_stage0.pe3
+   60 | wire [31:0] sign_ext_c;
+      |             ^~~~~~~~~~
+%Warning-UNDRIVEN: ../../../hw/vendor/openhwgroup_cv32e40p/rtl/cv32e40p_decoder.sv:137:23: Signal is not driven: 'data_load_o'
+                                                                                         : ... In instance testharness.core_v_mini_mcu_i.cpu_subsystem_i..gen_AVA.cv32e40p_wrapper_i.core_i.id_stage_i.decoder_i
+  137 |   output logic        data_load_o,          
+      |                       ^~~~~~~~~~~
+%Warning-CASEINCOMPLETE: ../../../hw/vendor/ava_accelerator/rtl/accelerator_top.sv:291:13: Case values incompletely covered (example pattern 0x3)
+  291 |             case (vsew)
+      |             ^~~~
+%Warning-CASEINCOMPLETE: ../../../hw/vendor/ava_accelerator/rtl/vector_registers.sv:214:9: Case values incompletely covered (example pattern 0x3)
+  214 |         case (vlmul) 
+      |         ^~~~
+%Warning-CASEINCOMPLETE: ../../../hw/vendor/ava_accelerator/rtl/vector_registers.sv:258:17: Case values incompletely covered (example pattern 0x4)
+  258 |                 case (elements_to_write)
+      |                 ^~~~
+%Warning-CASEINCOMPLETE: ../../../hw/vendor/ava_accelerator/rtl/vector_registers.sv:284:17: Case values incompletely covered (example pattern 0x1)
+  284 |                 case (elements_to_write)
+      |                 ^~~~
+%Warning-CASEINCOMPLETE: ../../../hw/vendor/ava_accelerator/rtl/vector_registers.sv:240:9: Case values incompletely covered (example pattern 0x3)
+  240 |         case (eff_vsew)
+      |         ^~~~
+%Warning-CASEINCOMPLETE: ../../../hw/vendor/ava_accelerator/rtl/vector_registers.sv:471:9: Case values incompletely covered (example pattern 0x3)
+  471 |         case (vlmul) 
+      |         ^~~~
+%Warning-CASEINCOMPLETE: ../../../hw/vendor/ava_accelerator/rtl/vector_registers.sv:497:9: Case values incompletely covered (example pattern 0x3)
+  497 |         case (eff_vsew)
+      |         ^~~~
+%Warning-CASEINCOMPLETE: ../../../hw/vendor/ava_accelerator/rtl/pe_32b.sv:82:5: Case values incompletely covered (example pattern 0xa)
+   82 |     case (op)
+      |     ^~~~
+%Warning-CASEINCOMPLETE: ../../../hw/vendor/ava_accelerator/rtl/pe_32b.sv:224:9: Case values incompletely covered (example pattern 0x2)
+  224 |         case (vsew)
+      |         ^~~~
+%Warning-CASEINCOMPLETE: ../../../hw/vendor/ava_accelerator/rtl/pe_32b.sv:235:9: Case values incompletely covered (example pattern 0x3)
+  235 |         case (vsew)
+      |         ^~~~
+%Warning-CASEINCOMPLETE: ../../../hw/vendor/ava_accelerator/rtl/pe_32b.sv:251:5: Case values incompletely covered (example pattern 0x3)
+  251 |     case (output_mode)
+      |     ^~~~
+%Warning-CASEINCOMPLETE: ../../../hw/vendor/ava_accelerator/rtl/vector_lsu.sv:83:9: Case values incompletely covered (example pattern 0x3)
+   83 |         case(vsew_i)
+      |         ^~~~
+%Error-BLKANDNBLK: ../../../hw/vendor/openhwgroup_cv32e40p/rtl/cv32e40p_cs_registers.sv:272:56: Unsupported: Blocked and non-blocking assignments to same variable: 'testharness.core_v_mini_mcu_i.cpu_subsystem_i.gen_AVA.cv32e40p_wrapper_i.core_i.cs_registers_i.mhpmcounter_q'
+  272 |   logic [                 31:0][MHPMCOUNTER_WIDTH-1:0] mhpmcounter_q;   
+      |                                                        ^~~~~~~~~~~~~
+                   ../../../hw/vendor/openhwgroup_cv32e40p/rtl/cv32e40p_cs_registers.sv:1507:16: ... Location of blocking assignment
+ 1507 |         assign mhpmcounter_q[cnt_gidx] = 'b0;
+      |                ^~~~~~~~~~~~~
+                   ../../../hw/vendor/openhwgroup_cv32e40p/rtl/cv32e40p_cs_registers.sv:1518:17: ... Location of nonblocking assignment
+ 1518 |                 mhpmcounter_q[cnt_gidx][31:0] <= csr_wdata_int;
+      |                 ^~~~~~~~~~~~~
+%Error-BLKANDNBLK: ../../../hw/vendor/openhwgroup_cv32e40p/rtl/cv32e40p_cs_registers.sv:272:56: Unsupported: Blocked and non-blocking assignments to same variable: 'testharness.core_v_mini_mcu_i.cpu_subsystem_i.gen_AVA.cv32e40p_wrapper_i.core_i.cs_registers_i.mhpmcounter_q'
+  272 |   logic [                 31:0][MHPMCOUNTER_WIDTH-1:0] mhpmcounter_q;   
+      |                                                        ^~~~~~~~~~~~~
+                   ../../../hw/vendor/openhwgroup_cv32e40p/rtl/cv32e40p_cs_registers.sv:1507:16: ... Location of blocking assignment
+ 1507 |         assign mhpmcounter_q[cnt_gidx] = 'b0;
+      |                ^~~~~~~~~~~~~
+                   ../../../hw/vendor/openhwgroup_cv32e40p/rtl/cv32e40p_cs_registers.sv:1520:17: ... Location of nonblocking assignment
+ 1520 |                 mhpmcounter_q[cnt_gidx][63:32] <= csr_wdata_int;
+      |                 ^~~~~~~~~~~~~
+%Error-BLKANDNBLK: ../../../hw/vendor/openhwgroup_cv32e40p/rtl/cv32e40p_cs_registers.sv:272:56: Unsupported: Blocked and non-blocking assignments to same variable: 'testharness.core_v_mini_mcu_i.cpu_subsystem_i.gen_AVA.cv32e40p_wrapper_i.core_i.cs_registers_i.mhpmcounter_q'
+  272 |   logic [                 31:0][MHPMCOUNTER_WIDTH-1:0] mhpmcounter_q;   
+      |                                                        ^~~~~~~~~~~~~
+                   ../../../hw/vendor/openhwgroup_cv32e40p/rtl/cv32e40p_cs_registers.sv:1507:16: ... Location of blocking assignment
+ 1507 |         assign mhpmcounter_q[cnt_gidx] = 'b0;
+      |                ^~~~~~~~~~~~~
+                   ../../../hw/vendor/openhwgroup_cv32e40p/rtl/cv32e40p_cs_registers.sv:1522:17: ... Location of nonblocking assignment
+ 1522 |                 mhpmcounter_q[cnt_gidx] <= mhpmcounter_increment[cnt_gidx];
+      |                 ^~~~~~~~~~~~~
+%Error-BLKANDNBLK: ../../../hw/vendor/openhwgroup_cv32e40p/rtl/cv32e40p_cs_registers.sv:272:56: Unsupported: Blocked and non-blocking assignments to same variable: 'testharness.core_v_mini_mcu_i.cpu_subsystem_i.gen_AVA.cv32e40p_wrapper_i.core_i.cs_registers_i.mhpmcounter_q'
+  272 |   logic [                 31:0][MHPMCOUNTER_WIDTH-1:0] mhpmcounter_q;   
+      |                                                        ^~~~~~~~~~~~~
+                   ../../../hw/vendor/openhwgroup_cv32e40p/rtl/cv32e40p_cs_registers.sv:1507:16: ... Location of blocking assignment
+ 1507 |         assign mhpmcounter_q[cnt_gidx] = 'b0;
+      |                ^~~~~~~~~~~~~
+                   ../../../hw/vendor/openhwgroup_cv32e40p/rtl/cv32e40p_cs_registers.sv:1512:13: ... Location of nonblocking assignment
+ 1512 |             mhpmcounter_q[cnt_gidx] <= 'b0;
+      |             ^~~~~~~~~~~~~
+%Error-BLKANDNBLK: ../../../hw/vendor/openhwgroup_cv32e40p/rtl/cv32e40p_cs_registers.sv:273:40: Unsupported: Blocked and non-blocking assignments to same variable: 'testharness.core_v_mini_mcu_i.cpu_subsystem_i.gen_AVA.cv32e40p_wrapper_i.core_i.cs_registers_i.mhpmevent_q'
+  273 |   logic [31:0] [31:0]                  mhpmevent_q, mhpmevent_n;          
+      |                                        ^~~~~~~~~~~
+                   ../../../hw/vendor/openhwgroup_cv32e40p/rtl/cv32e40p_cs_registers.sv:1538:16: ... Location of blocking assignment
+ 1538 |         assign mhpmevent_q[evt_gidx] = 'b0;
+      |                ^~~~~~~~~~~
+                   ../../../hw/vendor/openhwgroup_cv32e40p/rtl/cv32e40p_cs_registers.sv:1548:17: ... Location of nonblocking assignment
+ 1548 |                 mhpmevent_q[evt_gidx][NUM_HPM_EVENTS-1:0]  <= mhpmevent_n[evt_gidx][NUM_HPM_EVENTS-1:0] ;
+      |                 ^~~~~~~~~~~
+%Error-BLKANDNBLK: ../../../hw/vendor/openhwgroup_cv32e40p/rtl/cv32e40p_cs_registers.sv:275:40: Unsupported: Blocked and non-blocking assignments to same variable: 'testharness.core_v_mini_mcu_i.cpu_subsystem_i.gen_AVA.cv32e40p_wrapper_i.core_i.cs_registers_i.mcountinhibit_q'
+  275 |   logic [31:0]                         mcountinhibit_q, mcountinhibit_n;  
+      |                                        ^~~~~~~~~~~~~~~
+                   ../../../hw/vendor/openhwgroup_cv32e40p/rtl/cv32e40p_cs_registers.sv:1581:16: ... Location of blocking assignment
+ 1581 |         assign mcountinhibit_q[inh_gidx] = 'b0;
+      |                ^~~~~~~~~~~~~~~
+                   ../../../hw/vendor/openhwgroup_cv32e40p/rtl/cv32e40p_cs_registers.sv:1588:13: ... Location of nonblocking assignment
+ 1588 |             mcountinhibit_q[inh_gidx] <= mcountinhibit_n[inh_gidx];
+      |             ^~~~~~~~~~~~~~~
+%Warning-UNOPTFLAT: ../../../hw/vendor/ava_accelerator/rtl/vector_lsu.sv:114:36: Signal unoptimizable: Feedback to clock or circular logic: 'testharness.core_v_mini_mcu_i.cpu_subsystem_i.gen_AVA.a_top.vlsu0.byte_track_next'
+  114 |     logic signed [6:0] byte_track, byte_track_next;
+      |                                    ^~~~~~~~~~~~~~~
+                    ../../../hw/vendor/ava_accelerator/rtl/vector_lsu.sv:114:36:      Example path: testharness.core_v_mini_mcu_i.cpu_subsystem_i.gen_AVA.a_top.vlsu0.byte_track_next
+                    ../../../hw/vendor/ava_accelerator/rtl/vector_lsu.sv:266:5:      Example path: ALWAYS
+                    ../../../hw/core-v-mini-mcu/cpu_subsystem.sv:278:35:      Example path: testharness.core_v_mini_mcu_i.cpu_subsystem_i.gen_AVA.data_req_xbr_m2
+                    ../../../hw/vendor/openhwgroup_cv32e40p/rtl/cv32e40n_data_xbar.sv:46:5:      Example path: ALWAYS
+                    ../../../hw/vendor/openhwgroup_cv32e40p/rtl/cv32e40n_data_xbar.sv:37:11:      Example path: testharness.core_v_mini_mcu_i.cpu_subsystem_i.gen_AVA.xbar_mux.current_master
+                    ../../../hw/vendor/openhwgroup_cv32e40p/rtl/cv32e40n_data_xbar.sv:77:5:      Example path: ALWAYS
+                    ../../../hw/core-v-mini-mcu/cpu_subsystem.sv:280:35:      Example path: testharness.core_v_mini_mcu_i.cpu_subsystem_i.gen_AVA.data_rvalid_xbr_m2
+                    ../../../hw/vendor/ava_accelerator/rtl/vector_lsu.sv:266:5:      Example path: ALWAYS
+                    ../../../hw/vendor/ava_accelerator/rtl/vector_lsu.sv:115:23:      Example path: testharness.core_v_mini_mcu_i.cpu_subsystem_i.gen_AVA.a_top.vlsu0.cycle_addr_inc
+                    ../../../hw/vendor/ava_accelerator/rtl/vector_lsu.sv:139:5:      Example path: ALWAYS
+                    ../../../hw/vendor/ava_accelerator/rtl/vector_lsu.sv:114:36:      Example path: testharness.core_v_mini_mcu_i.cpu_subsystem_i.gen_AVA.a_top.vlsu0.byte_track_next
+%Error: Exiting due to 6 error(s), 121 warning(s)
 make: *** [Vtestharness.mk] Error 1
 
 ERROR: Failed to build openhwgroup.org:systems:core-v-mini-mcu:0 : '['make', '-j', '4']' exited with an error: 2

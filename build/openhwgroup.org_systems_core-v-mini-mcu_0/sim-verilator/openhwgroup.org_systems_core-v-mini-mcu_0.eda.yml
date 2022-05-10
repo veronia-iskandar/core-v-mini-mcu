@@ -1,4 +1,5 @@
 dependencies:
+  AI-Vector-Accelerator:ip:ava_core:0: []
   example:ip:slow_memory:0:
   - pulp-platform.org::tech_cells_generic:0
   lowrisc:constants:top_pkg:0: []
@@ -177,6 +178,7 @@ dependencies:
   - pulp-platform.org::register_interface:0
   openhwgroup.org:ip:verilator_waiver:0: []
   openhwgroup.org:systems:core-v-mini-mcu:0:
+  - AI-Vector-Accelerator:ip:ava_core:0
   - example:ip:slow_memory:0
   - lowrisc:dv_dpi:uartdpi:0.1
   - lowrisc:ibex:ibex_core:0.1
@@ -200,6 +202,48 @@ dependencies:
   pulp-platform.org:ip:fpnew:0:
   - pulp-platform.org::common_cells:1.20.0
 files:
+- core: AI-Vector-Accelerator:ip:ava_core:0
+  file_type: systemVerilogSource
+  name: ../../../hw/vendor/ava_accelerator/rtl/accelerator_pkg.sv
+- core: AI-Vector-Accelerator:ip:ava_core:0
+  file_type: systemVerilogSource
+  name: ../../../hw/vendor/ava_accelerator/rtl/accelerator_top.sv
+- core: AI-Vector-Accelerator:ip:ava_core:0
+  file_type: systemVerilogSource
+  name: ../../../hw/vendor/ava_accelerator/rtl/arith_stage.sv
+- core: AI-Vector-Accelerator:ip:ava_core:0
+  file_type: systemVerilogSource
+  name: ../../../hw/vendor/ava_accelerator/rtl/bit_ext.sv
+- core: AI-Vector-Accelerator:ip:ava_core:0
+  file_type: systemVerilogSource
+  name: ../../../hw/vendor/ava_accelerator/rtl/pe_32b.sv
+- core: AI-Vector-Accelerator:ip:ava_core:0
+  file_type: systemVerilogSource
+  name: ../../../hw/vendor/ava_accelerator/rtl/relu_bound.sv
+- core: AI-Vector-Accelerator:ip:ava_core:0
+  file_type: systemVerilogSource
+  name: ../../../hw/vendor/ava_accelerator/rtl/sat_unit.sv
+- core: AI-Vector-Accelerator:ip:ava_core:0
+  file_type: systemVerilogSource
+  name: ../../../hw/vendor/ava_accelerator/rtl/scalar_replicate.sv
+- core: AI-Vector-Accelerator:ip:ava_core:0
+  file_type: systemVerilogSource
+  name: ../../../hw/vendor/ava_accelerator/rtl/vector_csrs.sv
+- core: AI-Vector-Accelerator:ip:ava_core:0
+  file_type: systemVerilogSource
+  name: ../../../hw/vendor/ava_accelerator/rtl/vector_decoder.sv
+- core: AI-Vector-Accelerator:ip:ava_core:0
+  file_type: systemVerilogSource
+  name: ../../../hw/vendor/ava_accelerator/rtl/vector_registers.sv
+- core: AI-Vector-Accelerator:ip:ava_core:0
+  file_type: systemVerilogSource
+  name: ../../../hw/vendor/ava_accelerator/rtl/vw_sign_ext.sv
+- core: AI-Vector-Accelerator:ip:ava_core:0
+  file_type: systemVerilogSource
+  name: ../../../hw/vendor/ava_accelerator/rtl/vector_lsu.sv
+- core: AI-Vector-Accelerator:ip:ava_core:0
+  file_type: systemVerilogSource
+  name: ../../../hw/vendor/ava_accelerator/rtl/temporary_reg.sv
 - core: lowrisc:constants:top_pkg:0
   file_type: systemVerilogSource
   name: ../../../hw/vendor/lowrisc_opentitan/hw/top_earlgrey/rtl/top_pkg.sv

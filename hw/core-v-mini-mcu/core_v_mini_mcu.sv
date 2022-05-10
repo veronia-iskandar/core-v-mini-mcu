@@ -28,12 +28,14 @@ module core_v_mini_mcu #(
   import obi_pkg::*;
   import cv32e40p_apu_core_pkg::*;
 
+
   localparam NUM_BYTES = core_v_mini_mcu_pkg::MEM_SIZE;
   localparam DM_HALTADDRESS = core_v_mini_mcu_pkg::DEBUG_START_ADDRESS + 32'h00000800; //debug rom code (section .text in linker) starts at 0x800
 
   localparam JTAG_IDCODE = 32'h10001c05;
   localparam BOOT_ADDR = 'h180;
   localparam NUM_MHPMCOUNTERS = 1;
+  localparam GDP_NVPE = 1;
 
 
   // signals connecting core to memory
@@ -74,7 +76,8 @@ module core_v_mini_mcu #(
       .FPU             (FPU),
       .PULP_ZFINX      (PULP_ZFINX),
       .NUM_MHPMCOUNTERS(NUM_MHPMCOUNTERS),
-      .DM_HALTADDRESS  (DM_HALTADDRESS)
+      .DM_HALTADDRESS  (DM_HALTADDRESS),
+      .GDP_NVPE         (GDP_NVPE)
   ) cpu_subsystem_i (
       // Clock and Reset
       .clk_i,
