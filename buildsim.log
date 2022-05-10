@@ -109,4 +109,23 @@ INFO: Wrote dependency graph to /home/veronia/core-v-mini-mcu/build/openhwgroup.
 INFO: Wrote Makefile fragment to /home/veronia/core-v-mini-mcu/build/openhwgroup.org_systems_core-v-mini-mcu_0/sim-verilator/core-deps.mk
 INFO: Setting up project
 INFO: Building simulation model
+INFO: verilator -f openhwgroup.org_systems_core-v-mini-mcu_0.vc --cc --trace --trace-fst --trace-structs --trace-params --trace-max-array 1024 --x-assign unique --x-initial unique --exe tb_top.cpp -CFLAGS "-std=c++11 -Wall -g -fpermissive" -LDFLAGS "-pthread -lutil -lelf" -Wall
+Makefile:16: recipe for target 'Vtestharness.mk' failed
+
+ERROR: %Error-PKGNODECL: ../../../hw/vendor/openhwgroup_cv32e40p/rtl/cv32e40p_decoder.sv:28:117: Package/class 'accelerator_pkg' not found, and needs to be predeclared (IEEE 1800-2017 26.3)
+   28 | module cv32e40p_decoder import cv32e40p_pkg::*; import cv32e40p_apu_core_pkg::*; import cv32e40p_fpu_pkg::*; import accelerator_pkg::*;
+      |                                                                                                                     ^~~~~~~~~~~~~~~
+                  ... For error description see https://verilator.org/warn/PKGNODECL?v=4.202
+%Error: ../../../hw/vendor/openhwgroup_cv32e40p/rtl/cv32e40p_decoder.sv:28:117: Importing from missing package 'accelerator_pkg'
+   28 | module cv32e40p_decoder import cv32e40p_pkg::*; import cv32e40p_apu_core_pkg::*; import cv32e40p_fpu_pkg::*; import accelerator_pkg::*;
+      |                                                                                                                     ^~~~~~~~~~~~~~~
+%Warning-EOFNEWLINE: ../../../hw/vendor/openhwgroup_cv32e40p/rtl/cv32e40n_data_xbar.sv:94:10: Missing newline at end of file (POSIX 3.206).                                                                                            : ... Suggest add newline.
+   94 | endmodule
+      |          ^
+                     ... Use "/* verilator lint_off EOFNEWLINE */" and lint_on around source to disable this message.
+%Error: Exiting due to 2 error(s), 1 warning(s)
+        ... See the manual at https://verilator.org/verilator_doc.html for more assistance.
+make: *** [Vtestharness.mk] Error 1
+
+ERROR: Failed to build openhwgroup.org:systems:core-v-mini-mcu:0 : '['make', '-j', '4']' exited with an error: 2
 

@@ -375,6 +375,9 @@ files:
   name: ../../../hw/vendor/openhwgroup_cv32e40p/rtl/cv32e40p_fifo.sv
 - core: openhwgroup.org:ip:cv32e40p:0
   file_type: systemVerilogSource
+  name: ../../../hw/vendor/openhwgroup_cv32e40p/rtl/cv32e40n_data_xbar.sv
+- core: openhwgroup.org:ip:cv32e40p:0
+  file_type: systemVerilogSource
   name: ../../../hw/vendor/openhwgroup_cv32e40p/bhv/cv32e40p_wrapper.sv
 - core: openhwgroup.org:ip:cv32e40p:0
   file_type: systemVerilogSource

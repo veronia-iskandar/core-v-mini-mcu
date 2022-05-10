@@ -353,6 +353,7 @@ fusesoc-deps := \
   /home/veronia/core-v-mini-mcu/hw/vendor/openhwgroup_cv32e40p/rtl/cv32e40p_core.sv \
   /home/veronia/core-v-mini-mcu/hw/vendor/openhwgroup_cv32e40p/rtl/cv32e40p_apu_disp.sv \
   /home/veronia/core-v-mini-mcu/hw/vendor/openhwgroup_cv32e40p/rtl/cv32e40p_fifo.sv \
+  /home/veronia/core-v-mini-mcu/hw/vendor/openhwgroup_cv32e40p/rtl/cv32e40n_data_xbar.sv \
   /home/veronia/core-v-mini-mcu/hw/vendor/openhwgroup_cv32e40p/bhv/cv32e40p_wrapper.sv \
   /home/veronia/core-v-mini-mcu/hw/vendor/openhwgroup_cv32e40p/bhv/cv32e40p_core_log.sv \
   /home/veronia/core-v-mini-mcu/hw/vendor/openhwgroup_cv32e40p/rtl/cv32e40p_register_file_ff.sv \

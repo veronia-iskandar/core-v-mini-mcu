@@ -1141,6 +1141,7 @@ cores:
     - openhwgroup_cv32e40p/rtl/cv32e40p_core.sv
     - openhwgroup_cv32e40p/rtl/cv32e40p_apu_disp.sv
     - openhwgroup_cv32e40p/rtl/cv32e40p_fifo.sv
+    - openhwgroup_cv32e40p/rtl/cv32e40n_data_xbar.sv
     - openhwgroup_cv32e40p/bhv/cv32e40p_wrapper.sv
     - openhwgroup_cv32e40p/bhv/cv32e40p_core_log.sv
     - openhwgroup_cv32e40p/rtl/cv32e40p_register_file_ff.sv

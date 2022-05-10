@@ -6,11 +6,10 @@
   target_dir: "openhwgroup_cv32e40p",
 
   upstream: {
-    url: "https://github.com/openhwgroup/cv32e40p.git",
-    rev: "4b61f9489e296405d420c890cabe2962866d888d",
+    url: "https://github.com/AI-Vector-Accelerator/cv32e40p.git",
+    rev: "5405c2be2f63a6db0b72842df2cc48dd6a9aa84e",
   },
 
-  patch_dir: "patches/openhwgroup_cv32e40p",
 
   exclude_from_upstream: [
     "ci",
