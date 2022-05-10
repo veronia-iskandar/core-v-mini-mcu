@@ -1,0 +1,15 @@
+// Copyright 2020 OpenHW Group
+// Solderpad Hardware License, Version 2.1, see LICENSE.md for details.
+// SPDX-License-Identifier: Apache-2.0 WITH SHL-2.1
+{
+  name: "ava_accelerator",
+  target_dir: "ava_accelerator",
+
+  upstream: {
+    url: "https://github.com/AI-Vector-Accelerator/ava-core.git",
+    rev: "dedf5ae1cfb373e984973d3c4b7472ec3bf9baca",
+  },
+
+  
+
+}

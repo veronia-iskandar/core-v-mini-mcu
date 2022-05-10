@@ -1,0 +1,14 @@
+CAPI=2:
+filesets:
+  files_rtl:
+    depend:
+    - lowrisc:prim:prim_pkg
+    - lowrisc:prim_generic:pad_wrapper:0
+    file_type: systemVerilogSource
+    files:
+    - prim_pad_wrapper.sv
+name: lowrisc:prim_abstract:pad_wrapper
+targets:
+  default:
+    filesets:
+    - files_rtl
