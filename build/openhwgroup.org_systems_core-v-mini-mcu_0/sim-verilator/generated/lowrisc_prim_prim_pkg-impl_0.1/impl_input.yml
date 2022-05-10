@@ -1,4 +1,24 @@
 cores:
+  AI-Vector-Accelerator:ip:ava_core:0:
+    capi_version: 2
+    core_filepath: /home/veronia/core-v-mini-mcu/hw/vendor/ava_core.core
+    core_root: /home/veronia/core-v-mini-mcu/hw/vendor
+    files:
+    - openhwgroup_cv32e40p/rtl/accelerator_pkg.sv
+    - openhwgroup_cv32e40p/rtl/accelerator_top.sv
+    - openhwgroup_cv32e40p/rtl/arith_stage.sv
+    - openhwgroup_cv32e40p/rtl/bit_ext.sv
+    - openhwgroup_cv32e40p/rtl/pe_32b.sv
+    - openhwgroup_cv32e40p/rtl/relu_bound.sv
+    - openhwgroup_cv32e40p/rtl/sat_unit.sv
+    - openhwgroup_cv32e40p/rtl/scalar_replicate.sv
+    - openhwgroup_cv32e40p/rtl/vector_csrs.sv
+    - openhwgroup_cv32e40p/rtl/vector_decoder.sv
+    - openhwgroup_cv32e40p/rtl/vector_registers.sv
+    - openhwgroup_cv32e40p/rtl/vw_sign_ext.sv
+    - openhwgroup_cv32e40p/rtl/vector_lsu.sv
+    - openhwgroup_cv32e40p/rtl/temporary_reg.sv
+    used: false
   example:ip:slow_memory:0:
     capi_version: 2
     core_filepath: /home/veronia/core-v-mini-mcu/hw/ip_examples/slow_memory/example_slow_memory.core

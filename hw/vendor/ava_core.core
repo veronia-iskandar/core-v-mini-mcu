@@ -1,0 +1,34 @@
+CAPI=2:
+
+# Copyright 2021 OpenHW Group
+# Solderpad Hardware License, Version 2.1, see LICENSE.md for details.
+# SPDX-License-Identifier: Apache-2.0 WITH SHL-2.1
+
+name: "AI-Vector-Accelerator:ip:ava_core"
+description: "AI Accelerator"
+
+filesets:
+  files_rtl:
+    files:
+    - openhwgroup_cv32e40p/rtl/accelerator_pkg.sv
+    - openhwgroup_cv32e40p/rtl/accelerator_top.sv
+    - openhwgroup_cv32e40p/rtl/arith_stage.sv
+    - openhwgroup_cv32e40p/rtl/bit_ext.sv
+    - openhwgroup_cv32e40p/rtl/pe_32b.sv
+    - openhwgroup_cv32e40p/rtl/relu_bound.sv
+    - openhwgroup_cv32e40p/rtl/sat_unit.sv
+    - openhwgroup_cv32e40p/rtl/scalar_replicate.sv
+    - openhwgroup_cv32e40p/rtl/vector_csrs.sv
+    - openhwgroup_cv32e40p/rtl/vector_decoder.sv
+    - openhwgroup_cv32e40p/rtl/vector_registers.sv
+    - openhwgroup_cv32e40p/rtl/vw_sign_ext.sv
+    - openhwgroup_cv32e40p/rtl/vector_lsu.sv
+    - openhwgroup_cv32e40p/rtl/temporary_reg.sv
+    file_type: systemVerilogSource
+
+
+
+targets:
+  default:
+    filesets:
+    - files_rtl
